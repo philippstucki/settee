@@ -3,7 +3,7 @@
 /**
 * HTTP REST Client for CouchDB API
 */
-class SetteeRestClient {
+class RestClient {
   
   /**
   * HTTP Timeout in Milliseconds
@@ -21,7 +21,7 @@ class SetteeRestClient {
   static function get_instance($base_url) {
 
     if (empty(self::$curl_workers[$base_url])) {
-      self::$curl_workers[$base_url] = new SetteeRestClient($base_url);
+      self::$curl_workers[$base_url] = new RestClient($base_url);
     }
     
     return self::$curl_workers[$base_url];
@@ -78,7 +78,7 @@ class SetteeRestClient {
     
     $resp_code = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
     if ($resp_code == 404 ) {
-      throw new SetteeRestClientException("Couch document not found at: '$full_url'");
+      throw new RestClientException("Couch document not found at: '$full_url'");
     }
 
     if (function_exists('http_parse_headers')) {
@@ -171,14 +171,14 @@ class SetteeRestClient {
   /**
    * Check http status for safe return codes
    *
-   * @throws SetteeRestClientException
+   * @throws RestClientException
    */
   private function check_status($response) {
     $resp_code = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
 
     if ($resp_code < 199 || $resp_code > 399 || !empty($response['decoded']->error)) {
       $msg = "CouchDB returned: \"HTTP 1.1. $resp_code\". ERROR: " . $response['json'];
-      throw new SetteeRestClientException($msg);
+      throw new RestClientException($msg);
     }
   }
 
@@ -243,4 +243,4 @@ class SetteeRestClient {
   }
 }
 
-class SetteeRestClientException extends Exception {}
+class RestClientException extends Exception {}
