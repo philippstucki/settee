@@ -104,6 +104,6 @@ class Server {
 
 }
 
-class ServerErrorException extends Exception {}
-class DatabaseException extends Exception {}
-class WrongInputException extends Exception {}
+class ServerErrorException extends \Exception {}
+class DatabaseException extends \Exception {}
+class WrongInputException extends \Exception {}

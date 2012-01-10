@@ -245,4 +245,4 @@ class RestClient {
   }
 }
 
-class RestClientException extends Exception {}
+class RestClientException extends \Exception {}
