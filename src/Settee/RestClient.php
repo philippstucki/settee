@@ -1,5 +1,7 @@
 <?php
 
+namespace Settee;
+
 /**
 * HTTP REST Client for CouchDB API
 */
