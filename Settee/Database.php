@@ -110,6 +110,15 @@ class Database {
     return $document;
   }
 
+  public function bulk_save($documents) {
+      $full_uri = $this->dbname . "/_bulk_docs";
+      $bulkDocs = array();
+      $bulkDocs['docs'] = $documents;
+      $document_json = json_encode($bulkDocs, JSON_NUMERIC_CHECK);
+      $ret = $this->rest_client->http_post($full_uri, $document_json);
+      return $ret;
+  }
+
   /**
    * @param  $doc
    * @param  $name

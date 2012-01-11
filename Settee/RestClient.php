@@ -135,6 +135,13 @@ class RestClient {
   }
 
   /**
+  * HTTP POST
+  */
+  function http_post($uri, $data = array()) {
+    return $this->http_request('POST', $uri, $data);
+  }
+
+  /**
   * HTTP DELETE
   */
   function http_delete($uri, $data = array()) {
@@ -155,6 +162,7 @@ class RestClient {
 
     if (!empty($data)) {
       curl_setopt($this->curl, CURLOPT_HTTPHEADER, array('Content-Length: ' . strlen($data)));
+      curl_setopt($this->curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
       curl_setopt($this->curl, CURLOPT_POSTFIELDS, $data);
     }
 
