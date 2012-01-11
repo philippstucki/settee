@@ -227,7 +227,7 @@ class Database {
    * @return void
    */
   function save_view($design_doc, $view_name, $map_src, $reduce_src = null) {
-    $obj = new stdClass();
+    $obj = new \stdClass();
     $obj->_id = "_design/" . urlencode($design_doc);
     $view_name = urlencode($view_name);
     $obj->views->$view_name->map = $map_src;
