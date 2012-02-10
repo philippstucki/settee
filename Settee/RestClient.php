@@ -166,6 +166,7 @@ class RestClient {
       curl_setopt($this->curl, CURLOPT_POSTFIELDS, $data);
     }
 
+    curl_setopt($this->curl, CURLOPT_TIMEOUT, 10);
     curl_setopt($this->curl, CURLOPT_URL, $this->get_full_url($uri));
     curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $http_method);
 
