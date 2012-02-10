@@ -170,6 +170,11 @@ class RestClient {
     curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $http_method);
 
     $response = curl_exec($this->curl);
+
+    if (curl_errno($this->curl) !== 0) {
+        throw new RestClientException('curl error: '.curl_error($this->curl));
+    }
+
     $response_decoded = $this->decode_response($response);
     $response = array('json' => $response, 'decoded'=>$response_decoded);
 
